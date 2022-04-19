@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+
+}
+
+.poppins {
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-primary {
+    background-color: #689D6D !important;
+    outline: none !important;
+    border: transparent solid 1px !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background-color: transparent !important;
+    color: black !important;
+    border: #689D6D solid 1px !important;
+}
+
+.btn-delete {
+    background-color: #ee5253 !important;
+    outline: none !important;
+    border: transparent solid 1px !important;
+    color: white !important;
+}
+
+.btn-delete:hover {
+    background-color: transparent !important;
+    color: black !important;
+    border: #ee5253 solid 1px !important;
+}
+
+.btn-edit {
+    background-color: #ff9f43 !important;
+    outline: none !important;
+    border: transparent solid 1px !important;
+    color: white !important;
+}
+
+.btn-edit:hover {
+    background-color: transparent !important;
+    color: black !important;
+    border: #ff9f43 solid 1px !important;
+}
+
+.nav-item-active {
+    border-bottom: #689D6D solid 3px !important;
+}
