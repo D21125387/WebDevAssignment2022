@@ -1,4 +1,5 @@
 <?php
+// create database and populate data
 include 'config.php';
 
 try {
@@ -9,7 +10,7 @@ try {
     // use exec() because no results are returned
     $conn->exec($sql);
     echo "Database created successfully<br>";
-} catch(PDOException $e) {
+} catch (PDOException $e) {
     echo "<br><br>" . $sql . "<br>" . $e->getMessage();
 }
 
@@ -27,7 +28,7 @@ try {
     // use exec() because no results are returned
     $conn->exec($sql);
     echo "Table Groceri created successfully";
-} catch(PDOException $e) {
+} catch (PDOException $e) {
     echo "<br><br>" . $sql . "<br>" . $e->getMessage();
 }
 
@@ -44,7 +45,7 @@ try {
     // use exec() because no results are returned
     $conn->exec($sql);
     echo "Table Groceri created successfully";
-} catch(PDOException $e) {
+} catch (PDOException $e) {
     echo "<br><br>" . $sql . "<br>" . $e->getMessage();
 }
 
@@ -52,7 +53,7 @@ try {
     $sql = "INSERT INTO `users` (`id`, `username`, `password`) VALUES (1, 'admin', 'admin');";
     $conn->exec($sql);
     echo "Inserted into 'users' successfully";
-} catch(PDOException $e){
+} catch (PDOException $e) {
     echo "<br><br>" . $sql . "<br>" . $e->getMessage();
 }
 
@@ -68,7 +69,7 @@ try {
     $sql = "INSERT INTO `products` (`id`, `name`, `description`, `stock`, `price`) VALUES (5, 'Basil', 'Sweet n Spice Aroma', 100, 1.50);";
     $conn->exec($sql);
     echo "Inserted into 'products' successfully";
-} catch(PDOException $e){
+} catch (PDOException $e) {
     echo "<br><br>" . $sql . "<br>" . $e->getMessage();
 }
 

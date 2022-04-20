@@ -1,9 +1,11 @@
 <?php
 
+// suppress warnings
 error_reporting(0);
 
+// check user's login legitimacy
 session_start();
-if(!isset($_SESSION['username'])){
+if (!isset($_SESSION['username'])) {
     header("Location: index.php");
     exit(0);
 }
@@ -15,18 +17,24 @@ if(!isset($_SESSION['username'])){
     <meta charset="UTF-8">
     <title>Groceri Dashboard</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="poppins">
+
+<!-- Navbar section -->
 <section id="navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-3 ps-5 pe-5">
         <div class="container ps-5 pe-5">
             <a class="navbar-brand" href="dashboard.php">
-                <img src="assets/icons8-vegetables-box-100.png" alt="" width="30" height="30" class="img-fluid align-text-bottom" style="transform: translateY(-3px)">
+                <img src="assets/icons8-vegetables-box-100.png" alt="" width="30" height="30"
+                     class="img-fluid align-text-bottom" style="transform: translateY(-3px)">
                 <span style="color:#689D6D ">Groceri</span><span style="color: gray"> Dashboard</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -41,7 +49,8 @@ if(!isset($_SESSION['username'])){
                     </li>
                     <li class="nav-item">
                         <form class="m-auto" method="post" action="signout.php">
-                            <button type="submit" class="btn btn-danger"><i class="las la-sign-out-alt"></i> Sign Out</button>
+                            <button type="submit" class="btn btn-danger"><i class="las la-sign-out-alt"></i> Sign Out
+                            </button>
                         </form>
                     </li>
                 </ul>
@@ -50,37 +59,20 @@ if(!isset($_SESSION['username'])){
     </nav>
 </section>
 
+<!-- Add item section -->
 <section id="additem">
     <div class="container p-5">
-        <p><small><span>Dashboard</span><span style="color: gray">/Add Item</span></small></p>
+        <p><small><span><a href="dashboard.php" style="color: black; text-decoration: none">Dashboard</a></span><span style="color: gray">/Home</span></small></p>
         <a href="dashboard.php" class="btn btn-outline-dark"><i class="las la-arrow-left"></i> Back</a>
         <div class="text-center col-6 m-auto">
             <?php
-            $name = $_POST['name'];
-            $desc = $_POST['description'];
-            $stock = intval($_POST['stock']);
-            $price = doubleval($_POST['price']);
-
-
-            if(isset($name) && isset($desc) && isset($stock) && isset($price)){
-                if(is_string($name) && is_string($desc) && is_int($stock) && is_double($price)){
-                    if(!empty($name) || !empty($desc) || $stock > 0 || $price > 0){
-                        try {
-                            include 'conn.php';
-                            $sql = "INSERT INTO `products` (`id`, `name`, `description`, `stock`, `price`) VALUES (NULL, '$name', '$desc', $stock, $price);";
-                            $conn->exec($sql);
-                        } catch(PDOException $e) {
-                            echo $sql . "<br>" . $e->getMessage();
-                        }
-                        $conn = null;
-                        echo "<div class='alert alert-success'><i class='lar la-check-circle'></i> Successfully added new product: $name</div>";
-                    }
-                }
+            if(isset($_SESSION['addMessage'])){
+                echo $_SESSION['addMessage'];
             }
             ?>
         </div>
         <div class="row m-5">
-            <form action="additem.php" method="post" class="col-6 m-auto">
+            <form action="dbadd.php" method="post" class="col-6 m-auto">
                 <div class="row mb-3">
                     <label for="name" class="col-sm-4 col-form-label col-form-label-sm">Product Name</label>
                     <div class="col">
@@ -88,21 +80,25 @@ if(!isset($_SESSION['username'])){
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="description" class="col-sm-4 col-form-label col-form-label-sm">Product Description</label>
+                    <label for="description" class="col-sm-4 col-form-label col-form-label-sm">Product
+                        Description</label>
                     <div class="col">
-                        <input type="text" class="form-control form-control-sm" id="description" name="description" required>
+                        <input type="text" class="form-control form-control-sm" id="description" name="description"
+                               required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="stock" class="col-sm-4 col-form-label col-form-label-sm">Product Stock</label>
                     <div class="col">
-                        <input type="number" class="form-control form-control-sm" id="stock" min="0" step="1" name="stock" required>
+                        <input type="number" class="form-control form-control-sm" id="stock" min="0" step="1"
+                               name="stock" required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="price" class="col-sm-4 col-form-label col-form-label-sm">Product Price</label>
                     <div class="col">
-                        <input type="number" class="form-control form-control-sm" id="price" min="0.00" step="0.01" name="price" required>
+                        <input type="number" class="form-control form-control-sm" id="price" min="0.00" step="0.01"
+                               name="price" required>
                     </div>
                 </div>
                 <div class="m-auto text-center">
@@ -113,9 +109,9 @@ if(!isset($_SESSION['username'])){
     </div>
 </section>
 
+<!-- Footer -->
 <section id="footer">
     <div class="container">
-
         <div class="d-flex justify-content-center m-auto mb-5" style="opacity: 0.25;">
             <img src="assets/icons8-cauliflower-64.png" width="40" height="40" alt="">
             <img src="assets/icons8-radish-64.png" width="40" height="40" alt="">
@@ -123,17 +119,28 @@ if(!isset($_SESSION['username'])){
             <img src="assets/icons8-eggplant-64.png" width="40" height="40" alt="">
         </div>
         <div class="text-center">
-            <p class="text-black-50">Made with <span style="color: pink">&heartsuit;</span> by <span class="text-black">D21125387</span> | Assets by
+            <p class="text-black-50">Made with <span style="color: pink">&heartsuit;</span> by <span class="text-black">D21125387</span>
+                | Assets by
                 <a href="https://icons8.com" class="text-decoration-none text-black fw-bold">Icons8.com</a></p>
         </div>
     </div>
 </section>
+
+<!-- Prevent duplicated form submit entry -->
 <script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
     }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+
+<!-- Bootstrap Requirement -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        crossorigin="anonymous"></script>
 <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<?php
+// clear log
+unset($_SESSION['addMessage']);
+?>
