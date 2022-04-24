@@ -9,6 +9,7 @@ session_start();
     <head>
         <meta charset="UTF-8">
         <title>Groceri Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
         <link rel="stylesheet"
               href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
@@ -29,6 +30,9 @@ session_start();
     </section>
 
 <!-- login section -->
+<?php
+// default: admin admin
+?>
     <section id="login">
         <div class="container p-5">
             <div class="row">
