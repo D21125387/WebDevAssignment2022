@@ -9,7 +9,8 @@ MySQL hooked through PHP's built-in PDO connection
 * Bootstrap
 * MAMP (Free)
 
-Demo credentials
+## Demo credentials
+https://ceni.xyz/demo/groceri
 * user: admin
 * pass: admin
 
