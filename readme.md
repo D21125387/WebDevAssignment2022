@@ -21,3 +21,4 @@ Voila! visit /index.php and you're ready to go.
 
 ## Known Issues
 * Not supported for mobile
+* Session doesn't expire until the user signs out
